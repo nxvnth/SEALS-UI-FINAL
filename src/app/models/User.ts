@@ -13,10 +13,18 @@ const UserSchema: Schema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     name: { type: String },
+    watchlist: [
+      {
+        videoId: String,
+        title: String,
+        watchedAt: Date
+      }
+    ]
   },
   {
     timestamps: true // Adds createdAt and updatedAt automatically
-  }
+  },
+  
 );
 
 // Prevent model overwrite error in dev (Hot Reload safe)

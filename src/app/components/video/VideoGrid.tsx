@@ -213,6 +213,16 @@ const handleVideoSelect = async (videoId: string) => {
             score={video.score}
             isProcessing={video.isProcessing}
             onSelect={handleVideoSelect}
+            onWatch={async (videoId, title) => {
+              try {
+                // Directly call the server action
+                await import('@/app/services/watchService').then(({ addToWatchlist }) =>
+                  addToWatchlist(videoId, title)
+                );
+              } catch (e) {
+                console.warn("User not logged in or session expired, skipping watchlist entry.");
+              }
+            }}
           />
         </div>
       ))}
